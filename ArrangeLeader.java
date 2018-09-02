@@ -1,18 +1,24 @@
 // you can also use imports, for example:
-// import java.util.*;
-
+import java.util.*;
+import java.util.stream.*;
 // you can write to stdout for debugging purposes, e.g.
 // System.out.println("this is a debug message");
 
 class ArrangeLeader {
     public int[] solution(int K, int M, int[] A) {
         // write your code in Java SE 8
+        List<Integer> allLeaders = new ArrayList<Integer>();
         int size = A.length;
         for(int i=0;i<size-K+1;i++){
             for(int j=i;j<=k+i-1;j++){
                 A[j]++;
             }
+            allLeaders.addAll(calculateLeader(A,M,size));
+            for(int j=i;j<=k+i-1;j++){
+                A[j]--;
+            }
         }
+        return allLeaders.stream().mapToInt(Integer::intValue).toArray();
     }
     
     public List<Integer> calculateLeader(int[] A, int M, int size){
